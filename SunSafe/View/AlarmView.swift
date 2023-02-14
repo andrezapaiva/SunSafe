@@ -22,6 +22,7 @@ struct AlarmView: View {
                 .onChange(of: alarm.enabled, perform: { enabled in
                     enabled ? setAlarm() : cancelAlarm()
                 })
+                .tint(Color("yellow"))
                 .padding()
         }
         .onAppear {
