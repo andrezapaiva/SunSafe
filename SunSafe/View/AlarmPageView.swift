@@ -95,7 +95,6 @@ struct AlarmPageView: View {
                                 Spacer()
                                 
                                 HStack {
-                                   
                                     
                                     Button () {
                                         if (progressValue) > 0.0 {
@@ -125,17 +124,19 @@ struct AlarmPageView: View {
                                 
                             }
                             
-                            VStack {
-                                
-                                
+                            ZStack {
                                 
                                 ProgressBar(progress: self.progressValue)
                                     .frame(width: 160.0, height: 160.0)
                                     .padding(20.0)
-                              
-                              
+                                
+                                
                                 Text("\(timesApplied) / \(dailyAlarms.count)")
+                                    .foregroundColor(timesApplied == dailyAlarms.count ? Color("yellow") : Color("grey"))
+                                    .font(.system(size: 22, weight: .bold))
+                               
                             }
+                            
                             HStack {
                                 Text("Você aplicou protetor solar \(timesApplied) vezes hoje. Aplique mais vezes para cumprir sua meta diária")
                                     .padding(.top, 5)
