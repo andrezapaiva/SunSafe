@@ -131,8 +131,10 @@ struct AlarmPageView: View {
                     Image ("botaoMenos")
                         .padding(.top, 5)
                         .padding(.trailing, 3)
+                        .opacity(timesApplied == 0 ? 0.4 : 1.0)
                     
                 }
+                .disabled(timesApplied == 0)
                 
                 Button {
                     print("aumentando \(timesApplied)")
@@ -144,8 +146,10 @@ struct AlarmPageView: View {
                     
                     Image ("botaoMais")
                         .padding(.top, 5)
+                        .opacity(timesApplied == (dailyAlarms.count) ? 0.4 : 1.0)
                     
                 }
+                .disabled(timesApplied == (dailyAlarms.count))
                 .padding(.trailing, 23)
             }
             .buttonStyle(.plain)
@@ -173,6 +177,10 @@ struct AlarmPageView: View {
         HStack {
             Text("Você aplicou protetor solar \(timesApplied) \(setPlural(timesApplied)) hoje")
                 .padding(.top, 5)
+                .foregroundColor(Color("grey"))
+                .font(.subheadline)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 50)
                 .foregroundColor(Color("grey"))
                 .font(.subheadline)
                 .multilineTextAlignment(.center)
