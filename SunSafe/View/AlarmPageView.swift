@@ -12,7 +12,10 @@ struct AlarmPageView: View {
     @State var dailyAlarms:[AlarmModel] = [AlarmModel()]
     
     var progressValue: Float {
-        return Float(Double(timesApplied)/Double(dailyAlarms.count))
+        return Float(Double(timesApplied)/Double(activeAlarms))
+    }
+    var activeAlarms: Int {
+        dailyAlarms.filter({$0.enabled}).count
     }
     
     @State private var timesApplied: Int = 0
@@ -35,13 +38,10 @@ struct AlarmPageView: View {
                 Divider()
                     .padding(.top, 0.5)
                 
-                ScrollView {
+                List {
                     
-                    ZStack {
-                        Color("background")
-                            .ignoresSafeArea()
                         
-                        VStack {
+                        Group {
                             
                             HStack {
                                 Text("Alarmes")
@@ -64,28 +64,34 @@ struct AlarmPageView: View {
                                 })
                             }
                             
-                            Text("Adicione os horários que você deseja aplicar protetor solar")
-                                .padding(.top, 5)
-                                .foregroundColor(Color("grey"))
-                                .font(.subheadline)
-                                .multilineTextAlignment(.center)
-                                .padding(.horizontal, 50)
-                            
-                            List {
+
+                                Text("Adicione os horários que você deseja aplicar protetor solar")
+                                    .padding(.top, 5)
+                                    .foregroundColor(Color("grey"))
+                                    .font(.subheadline)
+                                    .multilineTextAlignment(.center)
+                                    .padding(.horizontal, 50)
+                                    .padding(.vertical, 8)
+
+
                                 ForEach($dailyAlarms) { alarm in
                                     Section {
                                         AlarmView(alarm: alarm)
+                                            .padding(.horizontal, 12)
+                                            .background {
+                                                Color.white
+                                                    .cornerRadius(8)
+                                                    .shadow(color: Color("grey").opacity(0.05), radius: 4, x: 3, y: 3)
+                                            }
+                                            .padding(.horizontal, 12)
+                                            .padding(.vertical, 8)
+                                                                    
                                     }
                                     
                                 }.onDelete(perform: {index in
                                     dailyAlarms.remove(at: Int(index.first!))
                                 })
                                 
-                            }
-                            .frame(height: 135*CGFloat(dailyAlarms.count))
-                            .padding(.top, -20)
-                            .shadow(color: Color("grey").opacity(0.05), radius: 4, x: 3, y: 3)
-                            .scrollContentBackground(.hidden)
                             
                             HStack {
                                 Text("Meta diária")
@@ -119,10 +125,9 @@ struct AlarmPageView: View {
                                             .padding(.trailing, 23)
                                         
                                     }
-                                    
                                 }
-                                
                             }
+                            .padding(.top, 20)
                             
                             ZStack {
                                 
@@ -131,11 +136,12 @@ struct AlarmPageView: View {
                                     .padding(20.0)
                                 
                                 
-                                Text("\(timesApplied) / \(dailyAlarms.count)")
-                                    .foregroundColor(timesApplied == dailyAlarms.count ? Color("yellow") : Color("grey"))
+                                Text("\(timesApplied) / \(activeAlarms)")
+                                    .foregroundColor(timesApplied == activeAlarms ? Color("yellow") : Color("grey"))
                                     .font(.system(size: 22, weight: .bold))
                                
                             }
+                            .frame(maxWidth: .infinity)
                             
                             HStack {
                                 Text("Você aplicou protetor solar \(timesApplied) \(setPlural(timesApplied)) hoje. Aplique mais vezes para cumprir sua meta diária")
@@ -146,25 +152,25 @@ struct AlarmPageView: View {
                                     .padding(.horizontal, 50)
                             }
                         }
-                    }
-                    .navigationTitle("SunSafe")
-                    .navigationBarTitleDisplayMode(.inline)
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden, edges: .all)
+                        .listRowInsets(EdgeInsets())
+
                 }
+                .navigationTitle("SunSafe")
+                .navigationBarTitleDisplayMode(.inline)
+                .listStyle(.plain)
+                .scrollContentBackground(.hidden)
+                .background(Color("background"))
             }
         }
     }
     
     func setPlural(_ number: Int) -> String {
        return timesApplied == 1 ? "vez" : "vezes"
-        
-//        if timesApplied == 1 {
-//            return "vez"
-//        }
-//        else {
-//            return "vezes"
-//        }
     }
 }
+
 struct AlarmPageView_Previews: PreviewProvider {
     static let dailyAlarms:[AlarmModel] = [AlarmModel(), AlarmModel(), AlarmModel(), AlarmModel()]
     
