@@ -37,7 +37,7 @@ struct AlarmView: View {
         print("Vai criar alarme!")
         let content = UNMutableNotificationContent()
         content.title = "SunSafe"
-        content.body = "Está na hora de aplicar protetor solar e registrar o seu progresso!"
+        content.body = "Está na hora de aplicar protetor solar e registrar o seu progresso"
         content.sound = UNNotificationSound.default//UNNotificationSound.init(named: "")
 
         let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.hour, .minute], from: alarm.time), repeats: false)

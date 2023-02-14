@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ProgressBar: View {
     
-    /// De 0 a 1 (Florence)
+    /// De 0 a 1
     var progress: Float
     
     var color: Color = Color("yellow")
