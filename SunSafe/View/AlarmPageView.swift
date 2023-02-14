@@ -96,47 +96,51 @@ struct AlarmPageView: View {
                                 
                                 HStack {
                                     
-                                    Button () {
-                                        if (progressValue) > 0.0 {
-                                            timesApplied -= 1
+                                    if timesApplied != 0 {
+                                        Button () {
+                                            if (progressValue) > 0.0 {
+                                                timesApplied -= 1
+                                            }
+                                        } label: {
+                                            Image ("botaoMenos")
+                                                .padding(.top, 5)
+                                                .padding(.trailing, 3)
+                                            
                                         }
-                                    } label: {
-                                        
+                                    } else {
                                         Image ("botaoMenos")
                                             .padding(.top, 5)
                                             .padding(.trailing, 3)
-                                        
+                                            .opacity(0.4)
                                     }
-                                    
-                                    Button () {
-                                        if (progressValue) < 1.0 {
-                                            timesApplied += 1
+                                    if timesApplied != (dailyAlarms.count) {
+                                        Button () {
+                                            if (progressValue) < 1.0 {
+                                                timesApplied += 1
+                                            }
+                                        } label: {
+                                            Image ("botaoMais")
+                                                .padding(.top, 5)
+                                                .padding(.trailing, 23)
                                         }
-                                    } label: {
-                                        
+                                    } else {
                                         Image ("botaoMais")
                                             .padding(.top, 5)
                                             .padding(.trailing, 23)
-                                        
+                                            .opacity(0.4)
                                     }
-                                    
                                 }
-                                
                             }
                             
                             ZStack {
-                                
                                 ProgressBar(progress: self.progressValue)
                                     .frame(width: 160.0, height: 160.0)
                                     .padding(20.0)
                                 
-                                
                                 Text("\(timesApplied) / \(dailyAlarms.count)")
                                     .foregroundColor(timesApplied == dailyAlarms.count ? Color("yellow") : Color("grey"))
                                     .font(.system(size: 22, weight: .bold))
-                               
                             }
-                            
                             HStack {
                                 Text("Você aplicou protetor solar \(timesApplied) \(setPlural(timesApplied)) hoje. Aplique mais vezes para cumprir sua meta diária")
                                     .padding(.top, 5)
@@ -155,14 +159,14 @@ struct AlarmPageView: View {
     }
     
     func setPlural(_ number: Int) -> String {
-       return timesApplied == 1 ? "vez" : "vezes"
+        return timesApplied == 1 ? "vez" : "vezes"
         
-//        if timesApplied == 1 {
-//            return "vez"
-//        }
-//        else {
-//            return "vezes"
-//        }
+        //        if timesApplied == 1 {
+        //            return "vez"
+        //        }
+        //        else {
+        //            return "vezes"
+        //        }
     }
 }
 struct AlarmPageView_Previews: PreviewProvider {
