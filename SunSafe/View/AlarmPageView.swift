@@ -96,7 +96,7 @@ struct AlarmPageView: View {
                                 
                                 HStack {
                                     
-                                    if timesApplied != 0 {
+                                    
                                         Button () {
                                             if (progressValue) > 0.0 {
                                                 timesApplied -= 1
@@ -105,15 +105,10 @@ struct AlarmPageView: View {
                                             Image ("botaoMenos")
                                                 .padding(.top, 5)
                                                 .padding(.trailing, 3)
-                                            
+                                                .opacity(timesApplied == 0 ? 0.4 : 1.0)
                                         }
-                                    } else {
-                                        Image ("botaoMenos")
-                                            .padding(.top, 5)
-                                            .padding(.trailing, 3)
-                                            .opacity(0.4)
-                                    }
-                                    if timesApplied != (dailyAlarms.count) {
+                                        .disabled(timesApplied == 0)
+                                   
                                         Button () {
                                             if (progressValue) < 1.0 {
                                                 timesApplied += 1
@@ -122,13 +117,10 @@ struct AlarmPageView: View {
                                             Image ("botaoMais")
                                                 .padding(.top, 5)
                                                 .padding(.trailing, 23)
+                                                .opacity(timesApplied == (dailyAlarms.count) ? 0.4 : 1.0)
                                         }
-                                    } else {
-                                        Image ("botaoMais")
-                                            .padding(.top, 5)
-                                            .padding(.trailing, 23)
-                                            .opacity(0.4)
-                                    }
+                                        .disabled(timesApplied == (dailyAlarms.count))
+                            
                                 }
                             }
                             
