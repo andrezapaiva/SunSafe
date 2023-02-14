@@ -138,7 +138,7 @@ struct AlarmPageView: View {
                             }
                             
                             HStack {
-                                Text("Você aplicou protetor solar \(timesApplied) vezes hoje. Aplique mais vezes para cumprir sua meta diária")
+                                Text("Você aplicou protetor solar \(timesApplied) \(setPlural(timesApplied)) hoje. Aplique mais vezes para cumprir sua meta diária")
                                     .padding(.top, 5)
                                     .foregroundColor(Color("grey"))
                                     .font(.subheadline)
@@ -152,6 +152,17 @@ struct AlarmPageView: View {
                 }
             }
         }
+    }
+    
+    func setPlural(_ number: Int) -> String {
+       return timesApplied == 1 ? "vez" : "vezes"
+        
+//        if timesApplied == 1 {
+//            return "vez"
+//        }
+//        else {
+//            return "vezes"
+//        }
     }
 }
 struct AlarmPageView_Previews: PreviewProvider {
