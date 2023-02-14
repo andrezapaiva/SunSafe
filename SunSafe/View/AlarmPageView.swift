@@ -93,25 +93,47 @@ struct AlarmPageView: View {
                                     .font(.system(size: 27, weight: .bold))
                                     .padding(.leading)
                                 Spacer()
-                            }
-                            
-                            VStack {
-                                ProgressBar(progress: self.progressValue)
-                                    .frame(width: 160.0, height: 160.0)
-                                    .padding(20.0)
                                 
-                                Button ("+") {
-                                    if (progressValue) < 1.0 {
-                                        timesApplied += 1
+                                HStack {
+                                   
+                                    
+                                    Button () {
+                                        if (progressValue) > 0.0 {
+                                            timesApplied -= 1
+                                        }
+                                    } label: {
+                                        
+                                        Image ("botaoMenos")
+                                            .padding(.top, 5)
+                                            .padding(.trailing, 3)
+                                        
+                                    }
+                                    
+                                    Button () {
+                                        if (progressValue) < 1.0 {
+                                            timesApplied += 1
+                                        }
+                                    } label: {
+                                        
+                                        Image ("botaoMais")
+                                            .padding(.top, 5)
+                                            .padding(.trailing, 23)
+                                        
                                     }
                                     
                                 }
                                 
-                                Button ("-") {
-                                    if (progressValue) > 0.0 {
-                                        timesApplied -= 1
-                                    }
-                                }
+                            }
+                            
+                            VStack {
+                                
+                                
+                                
+                                ProgressBar(progress: self.progressValue)
+                                    .frame(width: 160.0, height: 160.0)
+                                    .padding(20.0)
+                              
+                              
                                 Text("\(timesApplied) / \(dailyAlarms.count)")
                             }
                             HStack {
