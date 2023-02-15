@@ -121,11 +121,9 @@ struct AlarmPageView: View {
             HStack {
                 
                 Button {
-                    print("diminuindo \(timesApplied)")
                     if progressValue > 0.0 {
                         timesApplied -= 1
                     }
-                    print("\t\(timesApplied)")
                 } label: {
                     
                     Image ("botaoMenos")
@@ -137,19 +135,17 @@ struct AlarmPageView: View {
                 .disabled(timesApplied == 0)
                 
                 Button {
-                    print("aumentando \(timesApplied)")
                     if progressValue < 1.0 {
                         timesApplied += 1
                     }
-                    print("\t\(timesApplied)")
                 } label: {
                     
                     Image ("botaoMais")
                         .padding(.top, 5)
-                        .opacity(timesApplied == (dailyAlarms.count) ? 0.4 : 1.0)
+                        .opacity(timesApplied == activeAlarms ? 0.4 : 1.0)
                     
                 }
-                .disabled(timesApplied == (dailyAlarms.count))
+                .disabled(timesApplied == activeAlarms)
                 .padding(.trailing, 23)
             }
             .buttonStyle(.plain)
@@ -159,7 +155,6 @@ struct AlarmPageView: View {
     
     var metasCirculo: some View {
         ZStack {
-            let _ = print("PROGRESSO \(self.progressValue)")
             ProgressBar(progress: self.progressValue)
                 .frame(width: 160.0, height: 160.0)
                 .padding(20.0)
@@ -170,7 +165,7 @@ struct AlarmPageView: View {
                 .font(.system(size: 22, weight: .bold))
            
         }
-        .animation(.spring(response: 0.2, dampingFraction: 0.8), value: self.progressValue)
+        .animation(.easeInOut.speed(1.1), value: self.progressValue)
     }
     
     var metasTexto: some View {
