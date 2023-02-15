@@ -10,50 +10,63 @@ import SwiftUI
 
 struct AlarmPageView: View {
     @State var dailyAlarms:[AlarmModel] = [AlarmModel()]
+ //   private var NumberOfDailyAlarms: Int {dailyAlarms.count}
     
     var progressValue: Float {
-        return Float(Double(timesApplied)/Double(activeAlarms))
+        return Float(Double(timesApplied)/Double((activeAlarms == 0 ) ? 1 : activeAlarms))
     }
     var activeAlarms: Int {
         dailyAlarms.filter({$0.enabled}).count
     }
     
-    @State private var timesApplied: Int = 0
+    @State var timesApplied: Int = 0
+    
+    var fractionAnimation: Float {
+        activeAlarms == 0 ? 0.4 : 1
+    }
     
     var date = Date()
     
+    var singularOrPlural: String {
+        timesApplied == 1 ? "vez" : "vezes"
+    }
+    
+ //   @AppStorage("CONTAGEM_TIMES_APPLIED") var counter = 0
+ //   @AppStorage("CONTAGEM_DAILY_ALARMS") var counter2 = 0
+    
+    
     var body: some View {
-            VStack {
-                
-                Text(Date.dateFormatStyle.format(Date.now))
-                    .padding(.top, 7)
-                    .foregroundColor(Color("black"))
-                    .font(.system(size: 20, weight: .light))
-                
-                Divider()
-                    .padding(.top, 0.5)
-                
-                List {
-                    Group {
-                        alarmsHeader
-                        alarmsText
-                        alarmsListView
-                        metasHeader
-                        metasCirculo
-                        metasTexto
-                    }
-                    //                        .animation(.default, value: dailyAlarms)
-                    .frame(maxWidth: .infinity)
-                    .listRowBackground(Color.clear)
-                    .listRowSeparator(.hidden, edges: .all)
-                    .listRowInsets(EdgeInsets())
+        VStack {
+            
+            Text(Date.dateFormatStyle.format(Date.now))
+                .padding(.top, 7)
+                .foregroundColor(Color("black"))
+                .font(.system(size: 20, weight: .light))
+            
+            Divider()
+                .padding(.top, 0.5)
+            
+            List {
+                Group {
+                    alarmsHeader
+                    alarmsText
+                    alarmsListView
+                    metasHeader
+                    metasCirculo
+                    metasTexto
                 }
-                .navigationTitle("SunSafe")
-                .navigationBarTitleDisplayMode(.inline)
-                .listStyle(.plain)
-                .scrollContentBackground(.hidden)
+                //                        .animation(.default, value: dailyAlarms)
+                .frame(maxWidth: .infinity)
+                .listRowBackground(Color.clear)
+                .listRowSeparator(.hidden, edges: .all)
+                .listRowInsets(EdgeInsets())
             }
-            .background(Color("background"))
+            .navigationTitle("SunSafe")
+            .navigationBarTitleDisplayMode(.inline)
+            .listStyle(.plain)
+            .scrollContentBackground(.hidden)
+        }
+        .background(Color("background"))
     }
     
     var alarmsHeader: some View {
@@ -94,7 +107,7 @@ struct AlarmPageView: View {
     var alarmsListView: some View {
         ForEach($dailyAlarms) { alarm in
             Section {
-                AlarmView(alarm: alarm)
+                AlarmView(alarm: alarm, timesApplied: $timesApplied)
                     .padding(.horizontal, 12)
                     .background {
                         Color.white
@@ -104,10 +117,20 @@ struct AlarmPageView: View {
                     .padding(.horizontal, 12)
                     .padding(.vertical, 8)
             }
-
+            
         }.onDelete(perform: {index in
             dailyAlarms.remove(at: Int(index.first!))
+//            timesApplied -= 1
         })
+        .onChange(of: activeAlarms) { _ in
+            if timesApplied > activeAlarms {
+                timesApplied = activeAlarms
+            }
+        }
+        
+//    }.onAppear {
+//        // lê os dados salvos
+//         dailyAlarms.load()
     }
     
     var metasHeader: some View {
@@ -121,31 +144,31 @@ struct AlarmPageView: View {
             HStack {
                 
                 Button {
-                    if progressValue > 0.0 {
+//                    if progressValue > 0.0 {
                         timesApplied -= 1
-                    }
+//                    }
                 } label: {
                     
                     Image ("botaoMenos")
                         .padding(.top, 5)
                         .padding(.trailing, 3)
-                        .opacity(timesApplied == 0 ? 0.4 : 1.0)
+                        .opacity(timesApplied <= 0 ? 0.4 : 1.0)
                     
                 }
-                .disabled(timesApplied == 0)
+                .disabled(timesApplied <= 0)
                 
                 Button {
-                    if progressValue < 1.0 {
+//                    if progressValue < 1.0 {
                         timesApplied += 1
-                    }
+//                    }
                 } label: {
                     
                     Image ("botaoMais")
                         .padding(.top, 5)
-                        .opacity(timesApplied == activeAlarms ? 0.4 : 1.0)
+                        .opacity(timesApplied >= activeAlarms ? 0.4 : 1.0)
                     
                 }
-                .disabled(timesApplied == activeAlarms)
+                .disabled(timesApplied >= activeAlarms)
                 .padding(.trailing, 23)
             }
             .buttonStyle(.plain)
@@ -161,16 +184,18 @@ struct AlarmPageView: View {
             
             
             Text("\(timesApplied) / \(activeAlarms)")
-                .foregroundColor(timesApplied == activeAlarms ? Color("yellow") : Color("grey"))
+                .foregroundColor(timesApplied == activeAlarms && activeAlarms != 0 ? Color("yellow") : Color("grey"))
+                .opacity(Double(fractionAnimation))
+                .animation(.easeInOut(duration: 0.2), value: fractionAnimation)
                 .font(.system(size: 22, weight: .bold))
-           
+            
         }
         .animation(.easeInOut.speed(1.1), value: self.progressValue)
     }
     
     var metasTexto: some View {
         HStack {
-            Text("Você aplicou protetor solar \(timesApplied) \(setPlural(timesApplied)) hoje")
+            Text("Você aplicou protetor solar \(timesApplied) \(singularOrPlural) hoje")
                 .padding(.top, 5)
                 .foregroundColor(Color("grey"))
                 .font(.subheadline)
@@ -182,11 +207,8 @@ struct AlarmPageView: View {
                 .padding(.horizontal, 50)
         }
     }
-    
-    func setPlural(_ number: Int) -> String {
-       return timesApplied == 1 ? "vez" : "vezes"
-    }
 }
+
 
 struct AlarmPageView_Previews: PreviewProvider {
     static let dailyAlarms:[AlarmModel] = [AlarmModel(), AlarmModel(), AlarmModel(), AlarmModel()]

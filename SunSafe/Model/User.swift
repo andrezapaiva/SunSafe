@@ -28,4 +28,5 @@ class User: ObservableObject {
     func cumpriu(alarme: AlarmModel) {
         
     }
+    
 }

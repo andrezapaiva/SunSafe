@@ -10,6 +10,7 @@ import SwiftUI
 
 struct AlarmView: View {
     @Binding var alarm:AlarmModel
+    @Binding var timesApplied: Int
     
     var body: some View {
         HStack {

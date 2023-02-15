@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A20DCF0299D5C1E00B03EEE /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A20DCEF299D5C1E00B03EEE /* History.swift */; };
 		7A8AEC362996B73500EBA31F /* SunSafeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8AEC352996B73500EBA31F /* SunSafeApp.swift */; };
 		7A8AEC3A2996B73500EBA31F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A8AEC392996B73500EBA31F /* Assets.xcassets */; };
 		7A8AEC3D2996B73500EBA31F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A8AEC3C2996B73500EBA31F /* Preview Assets.xcassets */; };
@@ -15,12 +16,12 @@
 		7A8AEC4B2996B8AF00EBA31F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8AEC4A2996B8AF00EBA31F /* User.swift */; };
 		7A8AEC4D2996B8FB00EBA31F /* AlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8AEC4C2996B8FB00EBA31F /* AlarmView.swift */; };
 		7A8AEC502996BCFC00EBA31F /* CodableExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 7A8AEC4F2996BCFC00EBA31F /* CodableExtensions */; };
-		7A8AEC522996D9C700EBA31F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8AEC512996D9C700EBA31F /* Extensions.swift */; };
-		7A8AEC542996DA3500EBA31F /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8AEC532996DA3500EBA31F /* Date.swift */; };
+		7A8AEC522996D9C700EBA31F /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8AEC512996D9C700EBA31F /* Date.swift */; };
 		7A8AEC56299AB5C300EBA31F /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8AEC55299AB5C300EBA31F /* ProgressBarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7A20DCEF299D5C1E00B03EEE /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		7A8AEC322996B73500EBA31F /* SunSafe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SunSafe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A8AEC352996B73500EBA31F /* SunSafeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunSafeApp.swift; sourceTree = "<group>"; };
 		7A8AEC392996B73500EBA31F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -29,8 +30,7 @@
 		7A8AEC482996B81D00EBA31F /* AlarmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmModel.swift; sourceTree = "<group>"; };
 		7A8AEC4A2996B8AF00EBA31F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7A8AEC4C2996B8FB00EBA31F /* AlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmView.swift; sourceTree = "<group>"; };
-		7A8AEC512996D9C700EBA31F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		7A8AEC532996DA3500EBA31F /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		7A8AEC512996D9C700EBA31F /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		7A8AEC55299AB5C300EBA31F /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,7 +77,6 @@
 		7A8AEC3B2996B73500EBA31F /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				7A8AEC512996D9C700EBA31F /* Extensions.swift */,
 				7A8AEC3C2996B73500EBA31F /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
@@ -104,9 +103,10 @@
 		7A8AEC452996B76A00EBA31F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7A8AEC532996DA3500EBA31F /* Date.swift */,
+				7A8AEC512996D9C700EBA31F /* Date.swift */,
 				7A8AEC4A2996B8AF00EBA31F /* User.swift */,
 				7A8AEC482996B81D00EBA31F /* AlarmModel.swift */,
+				7A20DCEF299D5C1E00B03EEE /* History.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -188,12 +188,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A8AEC492996B81D00EBA31F /* AlarmModel.swift in Sources */,
-				7A8AEC542996DA3500EBA31F /* Date.swift in Sources */,
 				7A8AEC472996B7E900EBA31F /* AlarmPageView.swift in Sources */,
+				7A20DCF0299D5C1E00B03EEE /* History.swift in Sources */,
 				7A8AEC4B2996B8AF00EBA31F /* User.swift in Sources */,
 				7A8AEC4D2996B8FB00EBA31F /* AlarmView.swift in Sources */,
 				7A8AEC362996B73500EBA31F /* SunSafeApp.swift in Sources */,
-				7A8AEC522996D9C700EBA31F /* Extensions.swift in Sources */,
+				7A8AEC522996D9C700EBA31F /* Date.swift in Sources */,
 				7A8AEC56299AB5C300EBA31F /* ProgressBarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
