@@ -26,7 +26,7 @@ struct AlarmPageView: View {
         return Float(Double(timesApplied)/Double((activeAlarms == 0 ) ? 1 : activeAlarms))
     }
     var activeAlarms: Int {
-        user.history[today]?.dailyAlarms.filter({$0.enabled}).count ?? 0
+        user.history[Date.today]?.dailyAlarms.filter({$0.enabled}).count ?? 0
     }
     
     @State var timesApplied: Int = 0
@@ -90,10 +90,11 @@ struct AlarmPageView: View {
             Spacer()
             
             Button(action: {
+                print("Addei!")
                 withAnimation {
-                    user.history[today]?.dailyAlarms.append(AlarmModel())
+                    user.history[Date.today]!.dailyAlarms.append(AlarmModel())
                 }
-//                print(dailyAlarms.count)
+                
             }, label: {
                 
                 Image(systemName: "plus")
@@ -115,10 +116,20 @@ struct AlarmPageView: View {
             .padding(.vertical, 8)
     }
     
+    
+    func update(time: Date, enabled: Bool, at index: Int) {
+        let alarm = user.history[Date.today]?.dailyAlarms[index]
+        alarm?.time = time
+        alarm?.enabled = enabled
+        user.history[Date.today]?.dailyAlarms[index] = alarm!
+        print("CHAMEI!")
+    }
+    
+    
     var alarmsListView: some View {
-        ForEach(user.history[today]?.dailyAlarms ?? []) { alarm in
+        ForEach(Array((user.history[Date.today]?.dailyAlarms  ?? []).enumerated()), id: \.offset) { idx, alarm in
             Section {
-                AlarmView(alarm: $alarm, timesApplied: $timesApplied)
+                AlarmView(alarm: alarm, timesApplied: $timesApplied, index: idx, closure: update)
                     .padding(.horizontal, 12)
                     .background {
                         Color.white
@@ -130,7 +141,7 @@ struct AlarmPageView: View {
             }
             
         }.onDelete(perform: {index in
-            user.history[today]?.dailyAlarms ?? [].remove(at: Int(index.first!))
+            user.history[Date.today]?.dailyAlarms.remove(at: Int(index.first!))
 //            timesApplied -= 1
         })
         .onChange(of: activeAlarms) { _ in

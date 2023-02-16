@@ -9,24 +9,41 @@ import UserNotifications
 import SwiftUI
 
 struct AlarmView: View {
-    @Binding var alarm:AlarmModel
+    @State var alarm: AlarmModel
+    
     @Binding var timesApplied: Int
+    
+    var index: Int
+    
+    var closure: (Date, Bool, Int) -> ()
+    
+    @State var time: Date = Date.now
+    
+    @State var isEnabled: Bool = false
+    
     
     var body: some View {
         HStack {
-            DatePicker("Alarm time", selection: $alarm.time, displayedComponents: .hourAndMinute)
+            DatePicker("Alarm time", selection: $time, displayedComponents: .hourAndMinute)
                 .labelsHidden()
-                
+                .onChange(of: time) { newValue in
+                    closure(time, isEnabled, index)
+                }
             Spacer()
             
-            Toggle(alarm.enabled ? "" : "", isOn: $alarm.enabled)
-                .onChange(of: alarm.enabled, perform: { enabled in
+            Toggle(alarm.enabled ? "" : "", isOn: $isEnabled)
+                .onChange(of: isEnabled, perform: { enabled in
                     enabled ? setAlarm() : cancelAlarm()
+                    closure(time, isEnabled, index)
                 })
                 .tint(Color("yellow"))
                 .padding()
         }
         .onAppear {
+            
+            time = alarm.time
+            isEnabled = alarm.enabled
+            
             let center = UNUserNotificationCenter.current()
             center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
                 print(granted)

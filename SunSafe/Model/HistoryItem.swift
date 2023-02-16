@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class HistoryItem: Codable {
+struct HistoryItem: Codable {
     var dailyAlarms: [AlarmModel]
     var timesApplied:Int
     

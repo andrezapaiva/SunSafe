@@ -19,7 +19,7 @@ struct SunSafeApp: App {
         }.onChange(of: scenePhase, perform: {phase in
             switch phase {
             case .background:
-                break
+                try? User.shared.history.save(in: "history")
             case .inactive:
                 try? User.shared.history.save(in: "history")
             case .active:
