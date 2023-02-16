@@ -6,27 +6,37 @@
 //
 
 import Foundation
+import CodableExtensions
 
 class User: ObservableObject {
     
     // singleton
     static var shared: User = User()
     
-    @Published var alarms: [AlarmModel] = []
-    @Published var history: [AlarmModel] = []
-
-    func cria(alarm: AlarmModel) {
-        var newAlarms = alarms
-        newAlarms.append(alarm)
-        alarms = newAlarms
-    }
+    @Published var history: [String:HistoryItem] = (try? [String:HistoryItem].load(from: "history")) ??  [:]
     
-    func remove(alarm: AlarmModel) {
-        alarms = alarms.filter({$0 != alarm})
-    }
+    var lastDayInHistory:String? {  history.keys.sorted().last }
     
-    func cumpriu(alarme: AlarmModel) {
+    func createNewDay() {
+        if history[today] != nil { return }
+        // else
         
+        if let lastDayInHistory {
+            history[today] = history[lastDayInHistory]
+            history[today]?.timesApplied = 0
+            return
+        } // else
+        
+        history[today] = HistoryItem()
     }
-    
 }
+
+extension Date {
+    var yyyy_mm_dd:String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-mm-dd"
+        return formatter.string(from: self)
+    }
+}
+
+var today:String {Date().yyyy_mm_dd}

@@ -7,16 +7,26 @@
 
 import Foundation
 import SwiftUI
+import CodableExtensions
+
 
 struct AlarmPageView: View {
-    @State var dailyAlarms:[AlarmModel] = [AlarmModel()]
- //   private var NumberOfDailyAlarms: Int {dailyAlarms.count}
+    @ObservedObject var user = User.shared
+
+//     var dailyAlarms : [AlarmModel] =
+    
+//    func aaaa() {
+//        let xxx = user.history[today]?.dailyAlarms
+//        let yyy = user.history[today]?.timesApplied
+//    }
+
+ //   private var numberOfDailyAlarms: Int {dailyAlarms.count}
     
     var progressValue: Float {
         return Float(Double(timesApplied)/Double((activeAlarms == 0 ) ? 1 : activeAlarms))
     }
     var activeAlarms: Int {
-        dailyAlarms.filter({$0.enabled}).count
+        user.history[today]?.dailyAlarms.filter({$0.enabled}).count ?? 0
     }
     
     @State var timesApplied: Int = 0
@@ -36,13 +46,14 @@ struct AlarmPageView: View {
     
     
     var body: some View {
+        
         VStack {
             
-            Text(Date.dateFormatStyle.format(Date.now))
-                .padding(.top, 7)
-                .foregroundColor(Color("black"))
+                Text(Date.dateFormatStyle.format(Date.now))
+                    .padding(.top, 7)
+                    .foregroundColor(Color("black"))
                 .font(.system(size: 20, weight: .light))
-            
+                
             Divider()
                 .padding(.top, 0.5)
             
@@ -80,9 +91,9 @@ struct AlarmPageView: View {
             
             Button(action: {
                 withAnimation {
-                    dailyAlarms.append(AlarmModel())
+                    user.history[today]?.dailyAlarms.append(AlarmModel())
                 }
-                print(dailyAlarms.count)
+//                print(dailyAlarms.count)
             }, label: {
                 
                 Image(systemName: "plus")
@@ -105,9 +116,9 @@ struct AlarmPageView: View {
     }
     
     var alarmsListView: some View {
-        ForEach($dailyAlarms) { alarm in
+        ForEach(user.history[today]?.dailyAlarms ?? []) { alarm in
             Section {
-                AlarmView(alarm: alarm, timesApplied: $timesApplied)
+                AlarmView(alarm: $alarm, timesApplied: $timesApplied)
                     .padding(.horizontal, 12)
                     .background {
                         Color.white
@@ -119,7 +130,7 @@ struct AlarmPageView: View {
             }
             
         }.onDelete(perform: {index in
-            dailyAlarms.remove(at: Int(index.first!))
+            user.history[today]?.dailyAlarms ?? [].remove(at: Int(index.first!))
 //            timesApplied -= 1
         })
         .onChange(of: activeAlarms) { _ in
@@ -210,12 +221,12 @@ struct AlarmPageView: View {
 }
 
 
-struct AlarmPageView_Previews: PreviewProvider {
-    static let dailyAlarms:[AlarmModel] = [AlarmModel(), AlarmModel(), AlarmModel(), AlarmModel()]
-    
-    
-    static var previews: some View {
-        AlarmPageView(dailyAlarms: dailyAlarms)
-    }
-}
+//struct AlarmPageView_Previews: PreviewProvider {
+//    static let dailyAlarms:[AlarmModel] = [AlarmModel(), AlarmModel(), AlarmModel(), AlarmModel()]
+//    
+//    
+//    static var previews: some View {
+//        AlarmPageView()
+//    }
+//}
 
