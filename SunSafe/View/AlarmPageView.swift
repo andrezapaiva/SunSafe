@@ -99,7 +99,7 @@ struct AlarmPageView: View {
             Button(action: {
                 print("Addei!")
                 withAnimation {
-                    user.history[Date.today]!.dailyAlarms.append(AlarmModel())
+                    user.history[Date.today]!.dailyAlarms.append(AlarmModel(id: UUID()))
                 }
                 
             }, label: {
@@ -125,11 +125,13 @@ struct AlarmPageView: View {
     
     
     func update(time: Date, enabled: Bool, at index: Int) {
-        let alarm = user.history[Date.today]?.dailyAlarms[index]
-        alarm?.time = time
-        alarm?.enabled = enabled
-        user.history[Date.today]?.dailyAlarms[index] = alarm!
+        let alarm = user.history[Date.today]!.dailyAlarms[index]
+        print(user.history[Date.today]!.dailyAlarms[index].id)
+        alarm.time = time
+        alarm.enabled = enabled
+        user.history[Date.today]?.dailyAlarms[index] = alarm
         print("CHAMEI!")
+        print(alarm.id)
     }
     
     

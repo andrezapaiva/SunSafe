@@ -13,12 +13,16 @@ class AlarmModel: Identifiable, Equatable, Codable {
         lhs.id == rhs.id
     }
     
-    var id: UUID = UUID()
+    var id: UUID
     var time: Date = Date()
     var enabled: Bool = false
+    init(id: UUID) {
+        self.id = id
+    }
     
     func setAlarm() {
         print("Vai criar alarme!")
+        print(self.id.uuidString)
         let content = UNMutableNotificationContent()
         content.title = "SunSafe"
         content.body = "Está na hora de aplicar protetor solar e registrar o seu progresso"
@@ -40,6 +44,7 @@ class AlarmModel: Identifiable, Equatable, Codable {
     
     func cancelAlarm() {
         print("Cancelou alarme!")
+        print(self.id.uuidString)
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [self.id.uuidString])
     }
 }
