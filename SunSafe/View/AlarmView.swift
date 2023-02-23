@@ -29,6 +29,7 @@ struct AlarmView: View {
                 .onChange(of: time) { newValue in
                     closure(time, isEnabled, index)
                 }
+            
             Spacer()
             
             Toggle(alarm.enabled ? "" : "", isOn: $isEnabled)

@@ -15,6 +15,7 @@ struct SunSafeApp: App {
         WindowGroup {
             NavigationView {
                 AlarmPageView()
+                    .preferredColorScheme(.dark)
             }
         }.onChange(of: scenePhase, perform: {phase in
             switch phase {
