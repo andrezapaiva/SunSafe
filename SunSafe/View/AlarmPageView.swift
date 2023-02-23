@@ -29,7 +29,11 @@ struct AlarmPageView: View {
         user.history[Date.today]?.dailyAlarms.filter({$0.enabled}).count ?? 0
     }
     
-    @State var timesApplied: Int = 0
+    @State var timesApplied: Int = 0 {
+        didSet {
+            user.history[Date.today]?.timesApplied = timesApplied
+        }
+    }
     
     var fractionAnimation: Float {
         activeAlarms == 0 ? 0.4 : 1
@@ -76,6 +80,9 @@ struct AlarmPageView: View {
             .navigationBarTitleDisplayMode(.inline)
             .listStyle(.plain)
             .scrollContentBackground(.hidden)
+        }
+        .onAppear{
+            timesApplied = user.history[Date.today]?.timesApplied ?? 0
         }
         .background(Color("background"))
     }
@@ -141,6 +148,7 @@ struct AlarmPageView: View {
             }
             
         }.onDelete(perform: {index in
+            user.history[Date.today]?.dailyAlarms[Int(index.first!)].cancelAlarm()
             user.history[Date.today]?.dailyAlarms.remove(at: Int(index.first!))
 //            timesApplied -= 1
         })

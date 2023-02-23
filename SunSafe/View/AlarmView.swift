@@ -28,14 +28,20 @@ struct AlarmView: View {
                 .labelsHidden()
                 .accentColor(.black)
                 .onChange(of: time) { newValue in
+                    alarm.time = time
                     closure(time, isEnabled, index)
+                    alarm.cancelAlarm()
+                    if isEnabled {
+                        alarm.setAlarm()
+                    }
                 }
             
             Spacer()
             
             Toggle(alarm.enabled ? "" : "", isOn: $isEnabled)
                 .onChange(of: isEnabled, perform: { enabled in
-                    enabled ? setAlarm() : cancelAlarm()
+                    alarm.enabled = isEnabled
+                    enabled ? alarm.setAlarm() : alarm.cancelAlarm()
                     closure(time, isEnabled, index)
                 })
                 .tint(Color("yellow"))
@@ -54,29 +60,5 @@ struct AlarmView: View {
 //        .navigationBarTitle("SunSafe")
     }
     
-    func setAlarm() {
-        print("Vai criar alarme!")
-        let content = UNMutableNotificationContent()
-        content.title = "SunSafe"
-        content.body = "Está na hora de aplicar protetor solar e registrar o seu progresso"
-        content.sound = UNNotificationSound.default//UNNotificationSound.init(named: "")
-
-        let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.hour, .minute], from: alarm.time), repeats: false)
-
-        let request = UNNotificationRequest(identifier: alarm.id.uuidString, content: content, trigger: trigger)
-
-        UNUserNotificationCenter.current().add(request) { error in
-            if error != nil {
-                print("Error setting alarm: \(error!)")
-            } else {
-                print(request)
-                print(Date.now)
-            }
-        }
-    }
-    
-    func cancelAlarm() {
-        print("Cancelou alarme!")
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [alarm.id.uuidString])
-    }
+   
 }

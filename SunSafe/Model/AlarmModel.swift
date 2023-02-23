@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UserNotifications
 
 class AlarmModel: Identifiable, Equatable, Codable {
     static func == (lhs: AlarmModel, rhs: AlarmModel) -> Bool {
@@ -15,4 +16,30 @@ class AlarmModel: Identifiable, Equatable, Codable {
     var id: UUID = UUID()
     var time: Date = Date()
     var enabled: Bool = false
+    
+    func setAlarm() {
+        print("Vai criar alarme!")
+        let content = UNMutableNotificationContent()
+        content.title = "SunSafe"
+        content.body = "Está na hora de aplicar protetor solar e registrar o seu progresso"
+        content.sound = UNNotificationSound.default//UNNotificationSound.init(named: "")
+
+        let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.hour, .minute], from: self.time), repeats: false)
+
+        let request = UNNotificationRequest(identifier: self.id.uuidString, content: content, trigger: trigger)
+
+        UNUserNotificationCenter.current().add(request) { error in
+            if error != nil {
+                print("Error setting alarm: \(error!)")
+            } else {
+                print(request)
+                print(Date.now)
+            }
+        }
+    }
+    
+    func cancelAlarm() {
+        print("Cancelou alarme!")
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [self.id.uuidString])
+    }
 }
