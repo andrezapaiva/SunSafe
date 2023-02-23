@@ -26,6 +26,7 @@ struct AlarmView: View {
         HStack {
             DatePicker("Alarm time", selection: $time, displayedComponents: .hourAndMinute)
                 .labelsHidden()
+                .accentColor(.black)
                 .onChange(of: time) { newValue in
                     closure(time, isEnabled, index)
                 }

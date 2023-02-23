@@ -132,7 +132,7 @@ struct AlarmPageView: View {
                 AlarmView(alarm: alarm, timesApplied: $timesApplied, index: idx, closure: update)
                     .padding(.horizontal, 12)
                     .background {
-                        Color.white
+                        Color("alarmbox")
                             .cornerRadius(8)
                             .shadow(color: Color("grey").opacity(0.05), radius: 4, x: 3, y: 3)
                     }
