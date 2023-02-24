@@ -13,16 +13,14 @@ class AlarmModel: Identifiable, Equatable, Codable {
         lhs.id == rhs.id
     }
     
-    var id: UUID
+    var id: String {String(time.timeIntervalSince1970)}
     var time: Date = Date()
     var enabled: Bool = false
-    init(id: UUID) {
-        self.id = id
-    }
+    
     
     func setAlarm() {
-        print("Vai criar alarme!")
-        print(self.id.uuidString)
+        print("Vai criar alarme!", self.id)
+//        print(self.id.uuidString)
         let content = UNMutableNotificationContent()
         content.title = "SunSafe"
         content.body = "Está na hora de aplicar protetor solar e registrar o seu progresso"
@@ -30,7 +28,7 @@ class AlarmModel: Identifiable, Equatable, Codable {
 
         let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.hour, .minute], from: self.time), repeats: false)
 
-        let request = UNNotificationRequest(identifier: self.id.uuidString, content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: self.id, content: content, trigger: trigger)
 
         UNUserNotificationCenter.current().add(request) { error in
             if error != nil {
@@ -43,8 +41,8 @@ class AlarmModel: Identifiable, Equatable, Codable {
     }
     
     func cancelAlarm() {
-        print("Cancelou alarme!")
-        print(self.id.uuidString)
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [self.id.uuidString])
+        print("Cancelou alarme!", self.id)
+//        print(self.id.uuidString)
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [self.id])
     }
 }

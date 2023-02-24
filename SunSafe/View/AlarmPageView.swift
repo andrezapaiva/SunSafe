@@ -99,7 +99,7 @@ struct AlarmPageView: View {
             Button(action: {
                 print("Addei!")
                 withAnimation {
-                    user.history[Date.today]!.dailyAlarms.append(AlarmModel(id: UUID()))
+                    user.history[Date.today]!.dailyAlarms.append(AlarmModel())
                 }
                 
             }, label: {
