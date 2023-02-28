@@ -159,6 +159,10 @@ struct AlarmPageView: View {
                 timesApplied = activeAlarms
             }
         }
+        .onChange(of: user.history[Date.today]?.dailyAlarms) { _ in
+            try? User.shared.history.save(in: "history")
+            
+        }
         
 //    }.onAppear {
 //        // lê os dados salvos
