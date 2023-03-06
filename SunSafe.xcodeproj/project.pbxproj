@@ -20,6 +20,8 @@
 		7A8AEC502996BCFC00EBA31F /* CodableExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 7A8AEC4F2996BCFC00EBA31F /* CodableExtensions */; };
 		7A8AEC522996D9C700EBA31F /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8AEC512996D9C700EBA31F /* Date.swift */; };
 		7A8AEC56299AB5C300EBA31F /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8AEC55299AB5C300EBA31F /* ProgressBarView.swift */; };
+		7AB2854929B65BDA003AEA7D /* CalendarPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB2854829B65BDA003AEA7D /* CalendarPageView.swift */; };
+		7AB2854B29B691DD003AEA7D /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB2854A29B691DD003AEA7D /* Calendar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,9 @@
 		7A8AEC4C2996B8FB00EBA31F /* AlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmView.swift; sourceTree = "<group>"; };
 		7A8AEC512996D9C700EBA31F /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		7A8AEC55299AB5C300EBA31F /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
+		7AB2854729B3DF92003AEA7D /* SunSafe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SunSafe.entitlements; sourceTree = "<group>"; };
+		7AB2854829B65BDA003AEA7D /* CalendarPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPageView.swift; sourceTree = "<group>"; };
+		7AB2854A29B691DD003AEA7D /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +84,7 @@
 		7A8AEC342996B73500EBA31F /* SunSafe */ = {
 			isa = PBXGroup;
 			children = (
+				7AB2854729B3DF92003AEA7D /* SunSafe.entitlements */,
 				7A25725B29A9A60C00C40B46 /* Info.plist */,
 				7A25725A29A9465700C40B46 /* SunSafeRelease.entitlements */,
 				7A8AEC432996B75100EBA31F /* App */,
@@ -114,6 +120,8 @@
 				7A8AEC4C2996B8FB00EBA31F /* AlarmView.swift */,
 				7A8AEC55299AB5C300EBA31F /* ProgressBarView.swift */,
 				7A25725C29A9B48700C40B46 /* Authorization.swift */,
+				7AB2854829B65BDA003AEA7D /* CalendarPageView.swift */,
+				7AB2854A29B691DD003AEA7D /* Calendar.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -213,6 +221,8 @@
 				7A8AEC4B2996B8AF00EBA31F /* User.swift in Sources */,
 				7A8AEC4D2996B8FB00EBA31F /* AlarmView.swift in Sources */,
 				7A8AEC362996B73500EBA31F /* SunSafeApp.swift in Sources */,
+				7AB2854B29B691DD003AEA7D /* Calendar.swift in Sources */,
+				7AB2854929B65BDA003AEA7D /* CalendarPageView.swift in Sources */,
 				7A8AEC522996D9C700EBA31F /* Date.swift in Sources */,
 				7A8AEC56299AB5C300EBA31F /* ProgressBarView.swift in Sources */,
 				7A25725D29A9B48700C40B46 /* Authorization.swift in Sources */,
@@ -341,17 +351,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SunSafe/SunSafe.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"SunSafe/Preview Content\"";
 				DEVELOPMENT_TEAM = 67AYPRFZH8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SunSafe/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SunSafe;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "Por favor, autorize a leitura dos dados de saúde.";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Por favor, autorize o registro dos dados de saúde.";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -380,16 +389,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SunSafe/SunSafeRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"SunSafe/Preview Content\"";
 				DEVELOPMENT_TEAM = 67AYPRFZH8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SunSafe/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SunSafe;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "Por favor, autorize a leitura dos dados de saúde.";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Por favor, autorize o registro dos dados de saúde.";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

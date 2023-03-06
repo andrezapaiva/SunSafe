@@ -12,15 +12,7 @@ import CodableExtensions
 
 struct AlarmPageView: View {
     @ObservedObject var user = User.shared
-
-//     var dailyAlarms : [AlarmModel] =
-    
-//    func aaaa() {
-//        let xxx = user.history[today]?.dailyAlarms
-//        let yyy = user.history[today]?.timesApplied
-//    }
-
- //   private var numberOfDailyAlarms: Int {dailyAlarms.count}
+    @Environment(\.dismiss) var dismiss
     
     var progressValue: Float {
         return Float(Double(timesApplied)/Double((activeAlarms == 0 ) ? 1 : activeAlarms))
@@ -45,50 +37,87 @@ struct AlarmPageView: View {
         timesApplied == 1 ? "vez" : "vezes"
     }
     
- //   @AppStorage("CONTAGEM_TIMES_APPLIED") var counter = 0
- //   @AppStorage("CONTAGEM_DAILY_ALARMS") var counter2 = 0
-    
-    
     var body: some View {
         
-        VStack {
+        
+//        NavigationView {
             
+            VStack {
+                HStack{
+                    
                 Text(Date.dateFormatStyle.format(Date.now))
-                    .padding(.top, 7)
+                    .padding(.top, 15)
                     .foregroundColor(Color("black"))
-                .font(.system(size: 20, weight: .light))
+                    .font(.system(size: 20, weight: .light))
+                    .padding(.leading)
+                    
+                    Spacer()
                 
-            Divider()
-                .padding(.top, 0.5)
-            
-            List {
-                Group {
-                    alarmsHeader
-                    alarmsText
-                    alarmsListView
-                    metasHeader
-                    metasCirculo
-                    metasTexto
+                NavigationLink {
+                    CalendarPageView()
+                    
+                } label: {
+                    
+                    Image(systemName: "calendar")
+                        .foregroundColor(Color("yellow"))
+                        .frame(width: 30, height: 30, alignment: .topLeading)
+                        .font(.system(size: 30, weight: .regular))
+                        .padding(.top, 15)
+                        .padding(.trailing)
+                    
                 }
-                //                        .animation(.default, value: dailyAlarms)
-                .frame(maxWidth: .infinity)
-                .listRowBackground(Color.clear)
-                .listRowSeparator(.hidden, edges: .all)
-                .listRowInsets(EdgeInsets())
             }
-            .navigationTitle("SunSafe")
-            .navigationBarTitleDisplayMode(.inline)
-            .listStyle(.plain)
-            .scrollContentBackground(.hidden)
-        }
-        .onAppear{
-            timesApplied = user.history[Date.today]?.timesApplied ?? 0
-        }
-        .background(Color("background"))
+                
+                Divider()
+                    .padding(.top, 0.5)
+                
+                List {
+                    Group {
+                        alarmsHeader
+                        alarmsText
+                        alarmsListView
+                        metasHeader
+                        metasCirculo
+                        metasTexto
+                    }
+                    //                        .animation(.default, value: dailyAlarms)
+                    .frame(maxWidth: .infinity)
+                    .listRowBackground(Color.clear)
+                    .listRowSeparator(.hidden, edges: .all)
+                    .listRowInsets(EdgeInsets())
+                }
+                
+                
+                .navigationTitle("SunSafe")
+                .navigationBarTitleDisplayMode(.inline)
+                .listStyle(.plain)
+                .scrollContentBackground(.hidden)
+                
+            }
+            .onAppear{
+                timesApplied = user.history[Date.today]?.timesApplied ?? 0
+            }
+//                NavigationLink {
+//                    CalendarPageView()
+//
+//                } label: {
+//
+//                    Image(systemName: "calendar.circle")
+//                        .foregroundColor(Color("yellow"))
+//                        .frame(width: 30, height: 30, alignment: .topLeading)
+//                        .font(.system(size: 30, weight: .light))
+//                        .padding(.leading)
+//
+//
+//            }
+            
+            .background(Color("background"))
+//        }
     }
-    
     var alarmsHeader: some View {
+        
         HStack {
+            
             Text("Alarmes")
                 .foregroundColor(Color("black"))
                 .font(.system(size: 27, weight: .bold))
