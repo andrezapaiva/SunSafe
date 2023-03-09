@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		7A20DCF0299D5C1E00B03EEE /* HistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A20DCEF299D5C1E00B03EEE /* HistoryItem.swift */; };
 		7A20DCF3299D8B5E00B03EEE /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A20DCF2299D8B5E00B03EEE /* HealthKitManager.swift */; };
-		7A25725D29A9B48700C40B46 /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A25725C29A9B48700C40B46 /* Authorization.swift */; };
 		7A8AEC362996B73500EBA31F /* SunSafeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8AEC352996B73500EBA31F /* SunSafeApp.swift */; };
 		7A8AEC3A2996B73500EBA31F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A8AEC392996B73500EBA31F /* Assets.xcassets */; };
 		7A8AEC3D2996B73500EBA31F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A8AEC3C2996B73500EBA31F /* Preview Assets.xcassets */; };
@@ -21,7 +20,9 @@
 		7A8AEC522996D9C700EBA31F /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8AEC512996D9C700EBA31F /* Date.swift */; };
 		7A8AEC56299AB5C300EBA31F /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8AEC55299AB5C300EBA31F /* ProgressBarView.swift */; };
 		7AB2854929B65BDA003AEA7D /* CalendarPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB2854829B65BDA003AEA7D /* CalendarPageView.swift */; };
-		7AB2854B29B691DD003AEA7D /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB2854A29B691DD003AEA7D /* Calendar.swift */; };
+		7AB2855229B7E142003AEA7D /* CalendarDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB2855129B7E142003AEA7D /* CalendarDay.swift */; };
+		7AB2855429B8F71B003AEA7D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB2855329B8F71B003AEA7D /* Extensions.swift */; };
+		7AB2855629B91E6F003AEA7D /* DAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB2855529B91E6F003AEA7D /* DAO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +30,6 @@
 		7A20DCF2299D8B5E00B03EEE /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		7A25725A29A9465700C40B46 /* SunSafeRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SunSafeRelease.entitlements; sourceTree = "<group>"; };
 		7A25725B29A9A60C00C40B46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		7A25725C29A9B48700C40B46 /* Authorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorization.swift; sourceTree = "<group>"; };
 		7A8AEC322996B73500EBA31F /* SunSafe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SunSafe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A8AEC352996B73500EBA31F /* SunSafeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunSafeApp.swift; sourceTree = "<group>"; };
 		7A8AEC392996B73500EBA31F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -42,7 +42,9 @@
 		7A8AEC55299AB5C300EBA31F /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
 		7AB2854729B3DF92003AEA7D /* SunSafe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SunSafe.entitlements; sourceTree = "<group>"; };
 		7AB2854829B65BDA003AEA7D /* CalendarPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPageView.swift; sourceTree = "<group>"; };
-		7AB2854A29B691DD003AEA7D /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
+		7AB2855129B7E142003AEA7D /* CalendarDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDay.swift; sourceTree = "<group>"; };
+		7AB2855329B8F71B003AEA7D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		7AB2855529B91E6F003AEA7D /* DAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,9 +121,7 @@
 				7A8AEC462996B7E900EBA31F /* AlarmPageView.swift */,
 				7A8AEC4C2996B8FB00EBA31F /* AlarmView.swift */,
 				7A8AEC55299AB5C300EBA31F /* ProgressBarView.swift */,
-				7A25725C29A9B48700C40B46 /* Authorization.swift */,
-				7AB2854829B65BDA003AEA7D /* CalendarPageView.swift */,
-				7AB2854A29B691DD003AEA7D /* Calendar.swift */,
+				7AB2855029B7C91F003AEA7D /* Calendar */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -129,12 +129,23 @@
 		7A8AEC452996B76A00EBA31F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7AB2855529B91E6F003AEA7D /* DAO.swift */,
 				7A8AEC512996D9C700EBA31F /* Date.swift */,
 				7A8AEC4A2996B8AF00EBA31F /* User.swift */,
 				7A8AEC482996B81D00EBA31F /* AlarmModel.swift */,
 				7A20DCEF299D5C1E00B03EEE /* HistoryItem.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		7AB2855029B7C91F003AEA7D /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				7AB2854829B65BDA003AEA7D /* CalendarPageView.swift */,
+				7AB2855129B7E142003AEA7D /* CalendarDay.swift */,
+				7AB2855329B8F71B003AEA7D /* Extensions.swift */,
+			);
+			path = Calendar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,11 +232,12 @@
 				7A8AEC4B2996B8AF00EBA31F /* User.swift in Sources */,
 				7A8AEC4D2996B8FB00EBA31F /* AlarmView.swift in Sources */,
 				7A8AEC362996B73500EBA31F /* SunSafeApp.swift in Sources */,
-				7AB2854B29B691DD003AEA7D /* Calendar.swift in Sources */,
 				7AB2854929B65BDA003AEA7D /* CalendarPageView.swift in Sources */,
+				7AB2855429B8F71B003AEA7D /* Extensions.swift in Sources */,
+				7AB2855229B7E142003AEA7D /* CalendarDay.swift in Sources */,
 				7A8AEC522996D9C700EBA31F /* Date.swift in Sources */,
+				7AB2855629B91E6F003AEA7D /* DAO.swift in Sources */,
 				7A8AEC56299AB5C300EBA31F /* ProgressBarView.swift in Sources */,
-				7A25725D29A9B48700C40B46 /* Authorization.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

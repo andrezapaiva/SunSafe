@@ -14,6 +14,12 @@ struct AlarmPageView: View {
     @ObservedObject var user = User.shared
     @Environment(\.dismiss) var dismiss
     
+    var exampleData:[[String]] { return
+        [["1", "2", "3"],
+         ["4", "5", "6", "7"],
+         ["8", "9", "10", "11", "12"],
+         ["13", "14", "15", "16", "17", "18"]]}
+    
     var progressValue: Float {
         return Float(Double(timesApplied)/Double((activeAlarms == 0 ) ? 1 : activeAlarms))
     }
@@ -54,7 +60,11 @@ struct AlarmPageView: View {
                     Spacer()
                 
                 NavigationLink {
-                    CalendarPageView()
+                    
+                    CalendarPageView(matriz: [[("foi", true)]])
+                    
+                   // CalendarPageView(matriz: [[(exampleData.asString!, false)]])
+
                     
                 } label: {
                     
@@ -80,7 +90,7 @@ struct AlarmPageView: View {
                         metasCirculo
                         metasTexto
                     }
-                    //                        .animation(.default, value: dailyAlarms)
+                    
                     .frame(maxWidth: .infinity)
                     .listRowBackground(Color.clear)
                     .listRowSeparator(.hidden, edges: .all)
@@ -97,22 +107,8 @@ struct AlarmPageView: View {
             .onAppear{
                 timesApplied = user.history[Date.today]?.timesApplied ?? 0
             }
-//                NavigationLink {
-//                    CalendarPageView()
-//
-//                } label: {
-//
-//                    Image(systemName: "calendar.circle")
-//                        .foregroundColor(Color("yellow"))
-//                        .frame(width: 30, height: 30, alignment: .topLeading)
-//                        .font(.system(size: 30, weight: .light))
-//                        .padding(.leading)
-//
-//
-//            }
             
             .background(Color("background"))
-//        }
     }
     var alarmsHeader: some View {
         
@@ -192,10 +188,6 @@ struct AlarmPageView: View {
             try? User.shared.history.save(in: "history")
             
         }
-        
-//    }.onAppear {
-//        // lê os dados salvos
-//         dailyAlarms.load()
     }
     
     var metasHeader: some View {
@@ -253,7 +245,7 @@ struct AlarmPageView: View {
                 .opacity(Double(fractionAnimation))
                 .animation(.easeInOut(duration: 0.2), value: fractionAnimation)
                 .font(.system(size: 22, weight: .bold))
-            
+
         }
         .animation(.easeInOut.speed(1.1), value: self.progressValue)
     }
