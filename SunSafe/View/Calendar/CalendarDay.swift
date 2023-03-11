@@ -11,7 +11,7 @@ struct CalendarDay: View {
     var color: Color = .black
     var cornerRadius:Double = 10
     var aspectRatio:Double = 1
-    var text:String = "oi"
+    var text:String = ""
     
     var body: some View {
     ZStack {

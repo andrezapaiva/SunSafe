@@ -61,9 +61,9 @@ struct AlarmPageView: View {
                 
                 NavigationLink {
                     
-                    CalendarPageView(matriz: [[("foi", true)]])
+//                    CalendarPageView(matriz: [[("socorro", true)]])
                     
-                   // CalendarPageView(matriz: [[(exampleData.asString!, false)]])
+                    CalendarPageView(matriz:exampleData)
 
                     
                 } label: {

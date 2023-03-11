@@ -17,7 +17,6 @@ extension Date {
     
     func monthMatrix()->[[String]] {
         var result:[[String]] = []
-        
         let now = Date()
         let year = now.year()
         let month = now.month()
