@@ -13,7 +13,7 @@ var exampleData:[[String]] { return
      ["8", "9", "10", "11", "12"],
      ["13", "14", "15", "16", "17", "18"]]}
 
-func calendarMatrix2Dic()->[[(String,Bool)]] {
+func calendarMatrix2Dic(date:Date)->[[(String,Bool)]] {
     var result:[[(String,Bool)]] = []
     
     let calendar = Date().monthMatrix()

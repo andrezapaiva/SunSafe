@@ -18,22 +18,6 @@ struct SunSafeApp: App {
 //                    .preferredColorScheme(.dark)
             }
             
-//            Button {
-//                
-////                CalendarPageView()
-//                
-//            } label: {
-//                
-//                Image(systemName: "calendar")
-//                    .foregroundColor(Color("yellow"))
-//                    .frame(width: 30, height: 30, alignment: .topLeading)
-//                    .font(.system(size: 30, weight: .regular))
-//                    .padding(.top, 15)
-//                    .padding(.trailing)
-//                
-//            }
-            
-            
         }.onChange(of: scenePhase, perform: {phase in
             switch phase {
             case .background:

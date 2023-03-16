@@ -192,8 +192,8 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 				"pt-BR",
+				Base,
 			);
 			mainGroup = 7A8AEC292996B73500EBA31F;
 			packageReferences = (

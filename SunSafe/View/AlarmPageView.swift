@@ -14,12 +14,6 @@ struct AlarmPageView: View {
     @ObservedObject var user = User.shared
     @Environment(\.dismiss) var dismiss
     
-    var exampleData:[[String]] { return
-        [["1", "2", "3"],
-         ["4", "5", "6", "7"],
-         ["8", "9", "10", "11", "12"],
-         ["13", "14", "15", "16", "17", "18"]]}
-    
     var progressValue: Float {
         return Float(Double(timesApplied)/Double((activeAlarms == 0 ) ? 1 : activeAlarms))
     }
@@ -56,14 +50,13 @@ struct AlarmPageView: View {
                     .foregroundColor(Color("black"))
                     .font(.system(size: 20, weight: .light))
                     .padding(.leading)
+                    .environment(\.locale, Locale(identifier: "pt-BR"))
                     
                     Spacer()
                 
                 NavigationLink {
                     
-//                    CalendarPageView(matriz: [[("socorro", true)]])
-                    
-                    CalendarPageView(matriz:exampleData)
+                    CalendarPageView()
 
                     
                 } label: {
